@@ -1,0 +1,53 @@
+---
+# Base directory where all applications are staged and hosted
+base_dir: <%= node[:cloudfoundry_dea][:base_dir] %>
+
+# Local_route is the IP address of a well known server on your network, it
+# is used to choose the right ip address (think of hosts that have multiple nics
+# and IP addresses assigned to them) of the host running the DEA. Default
+# value of nil, should work in most cases.
+local_route: <%= node[:cloudfoundry_common][:local_route] %>
+
+# Port for accessing the files of running applications
+filer_port: <%= node[:cloudfoundry_dea][:filter_port] %>
+
+# NATS message bus URI
+mbus: nats://<%= node[:nats_server][:user] %>:<%= node[:nats_server][:password] %>@<%= node[:cloudfoundry_common][:nats_server][:host] %>:<%= node[:nats_server][:port] %>/
+
+intervals:
+  # Time interval between heartbeats sent to the Health Manager
+  heartbeat: <%= node[:cloudfoundry_dea][:heartbeat] %>
+logging:
+  level: <%= node[:cloudfoundry_dea][:log_level] %>
+  file: <%= node[:cloudfoundry_dea][:log_file] %>
+
+# Maximum memory allocated to this DEA. In a multi tenant setup, this
+# memory is divided amongst all applications managed by this DEA.
+max_memory: <%= node[:cloudfoundry_dea][:max_memory] %>
+
+# Secure environment for running applications in a multi tenant setup.
+secure: <%= node[:cloudfoundry_dea][:secure_env] %>
+
+# Allow more than one application to run per DEA
+multi_tenant: <%= node[:cloudfoundry_dea][:multi_tenant] %>
+
+# Provide ulimit based resource isolation in a multi tenant setup.
+enforce_ulimit: <%= node[:cloudfoundry_dea][:enforce_ulimit] %>
+
+pid: <%= node[:cloudfoundry_dea][:pid_file] %>
+
+#Force droplets to be downloaded over http even when
+#there is a shared directory containing the droplet.
+force_http_sharing: <%= node[:cloudfoundry_dea][:force_http_sharing] %>
+
+# This is where the execution agent determines its available runtimes.
+# version flags are assumed to be '-v' unless noted below.
+
+runtimes:
+<% node[:cloudfoundry_dea][:runtimes].each do |runtime| %>
+  <%= runtime[:name] %>:
+    executable: <%= runtime[:executable] %>
+    version: <%= runtime[:version] %>
+    version_flag: <%= runtime[:version_flag] %>
+    environment: <%= runtime[:environment] %>
+<% end %>
