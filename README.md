@@ -31,7 +31,7 @@ with the necessary configuration files and init scripts to run it. In
 addition, it will install any necessary runtimes specified in its
 attributes by including the specified cookbooks. To use in your recipes:
 
-    include_recipe "cloudfoundry_dea"
+    include_recipe "cloudfoundry-dea"
 
 Attributes
 ==========
