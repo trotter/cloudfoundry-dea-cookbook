@@ -36,6 +36,20 @@ attributes by including the specified cookbooks. To use in your recipes:
 Attributes
 ==========
 
+* `cloudfoundry_dea[:pid_file]` - Where to write the DEA's pid file. Default is `File.join(node[:cloudfoundry_common][:pid_dir], "dea.pid")`.
+* `cloudfoundry_dea[:log_file]` - Where to write the DEA's logs. Default is `File.join(node[:cloudfoundry_common][:log_dir], "dea.log")`.
+* `cloudfoundry_dea[:runtimes]` - Array of hashes storing the `name`, `cookbook`, `executable`, `version`, and `version_flag` for each runtime supported by this DEA.  TODO (trotter): Make the runtime's cookbook contain most of this info Default is `[`.
+* `cloudfoundry_dea[:base_dir]` - TODO (trotter): Find out what is stored here. Default is `/var/vcap/data/dea"`.
+* `cloudfoundry_dea[:filter_port]` - TODO (trotter): Find out what this does. Default is `12345`.
+* `cloudfoundry_dea[:heartbeat]` - Interval (in seconds) between heartbeats sent to the Health Manager. Default is `10`.
+* `cloudfoundry_dea[:log_level]` - Log level for the DEA. Default is `info"`.
+* `cloudfoundry_dea[:max_memory]` - The maximum amount of memory this DEA is allowed to allocate across all its applications. Default is `4096`.
+* `cloudfoundry_dea[:secure_env]` - TODO (trotter): Find out what this does. Default is `false`.
+* `cloudfoundry_dea[:multi_tenant]` - Allow the DEA to manage more than one application. Default is `true`.
+* `cloudfoundry_dea[:enforce_ulimit]` - TODO (trotter): Find out what this does. Default is `false`.
+* `cloudfoundry_dea[:force_http_sharing]` - Force the DEA to download applications over http, even when it's possible to access them via a shared directory. Default is `true`.
+
+
 License and Author
 ==================
 
