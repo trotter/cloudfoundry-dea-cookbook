@@ -1,23 +1,10 @@
 include_attribute "cloudfoundry-common"
-include_attribute "rbenv"
 
 # Where to write the DEA's pid file.
 default[:cloudfoundry_dea][:pid_file] = File.join(node[:cloudfoundry_common][:pid_dir], "dea.pid")
 
 # Where to write the DEA's logs.
 default[:cloudfoundry_dea][:log_file] = File.join(node[:cloudfoundry_common][:log_dir], "dea.log")
-
-# Array of hashes storing the `name`, `cookbook`, `executable`,
-# `version`, and `version_flag` for each runtime supported by this DEA.
-#
-# TODO (trotter): Make the runtime's cookbook contain most of this info
-default[:cloudfoundry_dea][:runtimes]    = [
-  { :name       => "ruby19",
-    :cookbook   => "cloudfoundry-common::ruby_1_9_2",
-    :executable => File.join(node[:rbenv][:system_prefix], "rbenv", "versions", node[:cloudfoundry_common][:ruby_1_9_2_version], "bin", "ruby"),
-    :version => node[:cloudfoundry_common][:ruby_1_9_2_version].sub('-', ''),
-    :version_flag => "-v | cut -d' ' -f2"
-}]
 
 # TODO (trotter): Find out what is stored here.
 default[:cloudfoundry_dea][:base_dir]    = "/var/vcap/data/dea"

@@ -44,7 +44,7 @@ force_http_sharing: <%= node[:cloudfoundry_dea][:force_http_sharing] %>
 # version flags are assumed to be '-v' unless noted below.
 
 runtimes:
-<% node[:cloudfoundry_dea][:runtimes].each do |runtime| %>
+<% node[:cloudfoundry_dea][:runtimes].each do |_, runtime| %>
   <%= runtime[:name] %>:
     executable: <%= runtime[:executable] %>
     version: <%= runtime[:version] %>

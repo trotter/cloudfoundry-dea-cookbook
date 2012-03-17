@@ -27,7 +27,7 @@ directory node[:cloudfoundry_dea][:base_dir] do
   mode  '0755'
 end
 
-node[:cloudfoundry_dea][:runtimes].each do |runtime|
+node[:cloudfoundry_dea][:runtimes].each do |k, runtime|
   include_recipe runtime[:cookbook]
 end
 
