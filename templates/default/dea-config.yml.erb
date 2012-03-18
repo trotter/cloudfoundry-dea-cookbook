@@ -44,10 +44,19 @@ force_http_sharing: <%= node[:cloudfoundry_dea][:force_http_sharing] %>
 # version flags are assumed to be '-v' unless noted below.
 
 runtimes:
-<% node[:cloudfoundry_dea][:runtimes].each do |_, runtime| %>
+<%- node[:cloudfoundry_dea][:runtimes].each do |_, runtime| %>
   <%= runtime[:name] %>:
     executable: <%= runtime[:executable] %>
     version: <%= runtime[:version] %>
     version_flag: <%= runtime[:version_flag] %>
     environment: <%= runtime[:environment] %>
-<% end %>
+<%- if runtime[:debug_env] %>
+    debug_env:
+<%- runtime[:debug_env].each do |state, opts| %>
+      <%= state %>:
+<%- opts.each do |opt| %>
+        - <%= opt %>
+<%- end # opts.each%>
+<%- end # debug_env.each%>
+<%- end # if debug_env%>
+<%- end # runtimes.each%>
