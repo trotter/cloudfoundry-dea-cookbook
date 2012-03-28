@@ -12,7 +12,7 @@ local_route: <%= node[:cloudfoundry_common][:local_route] %>
 filer_port: <%= node[:cloudfoundry_dea][:filter_port] %>
 
 # NATS message bus URI
-mbus: nats://<%= node[:nats_server][:user] %>:<%= node[:nats_server][:password] %>@<%= node[:cloudfoundry_common][:nats_server][:host] %>:<%= node[:nats_server][:port] %>/
+mbus: nats://<%= node[:nats_server][:user] %>:<%= node[:nats_server][:password] %>@<%= node[:cloudfoundry_common][:nats_server][:host] %>:<%= node[:cloudfoundry_common][:nats_server][:port] %>/
 
 intervals:
   # Time interval between heartbeats sent to the Health Manager
